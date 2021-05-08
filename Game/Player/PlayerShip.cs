@@ -25,11 +25,13 @@ namespace Game
         private bool shieldActivated = false;
         private float speed = MIN_SPEED;
 
+        private Image shipImage;
 
         public PlayerShip(int shipIndex)
         {
             this.shipIndex = shipIndex;
-            LoadImage();
+            this.shipImage = Images.ImageProvider.Instance.GetImage(this.shipIndex);
+            Extent = new SizeF(this.shipImage.Size.Width / 2, this.shipImage.Size.Height / 2);
 
             EventHandler.KeyDown += OnKeyDown;
             EventHandler.KeyUp += OnKeyUp;
@@ -177,20 +179,8 @@ namespace Game
         
         public override void DrawOn(Graphics graphics)
         {
-            graphics.DrawImage(LoadImage(), Bounds);
+            graphics.DrawImage(shipImage, Bounds);
         }
         
-        private Image LoadImage()
-        {
-            Image[] ships = Spritesheet.Load(@"Resources\shipsheetparts.png", new Size(200, 200));
-            foreach (Image img in ships)
-            {
-                img.RotateFlip(RotateFlipType.Rotate270FlipNone);
-            }
-            Image result = ships[shipIndex];
-            result.RotateFlip(RotateFlipType.RotateNoneFlipX);
-            Extent = new SizeF(result.Size.Width / 2, result.Size.Height / 2);
-            return result;
-        }
     }
 }

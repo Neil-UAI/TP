@@ -66,6 +66,7 @@
     <Compile Include="Enemies\Behaviors\FuncBehavior.cs" />
     <Compile Include="Enemies\Behaviors\FlockingBehavior.cs" />
     <Compile Include="Enemies\Behaviors\FollowPlayerBehavior.cs" />
+    <Compile Include="Images\ImageProvider.cs" />
     <Compile Include="Player\Cannon.cs" />
     <Compile Include="Enemies\EnemyShip.cs" />
     <Compile Include="Enemies\EnemySpawner.cs" />

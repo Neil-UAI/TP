@@ -27,7 +27,7 @@ namespace Game
         {
             Random rnd = new Random();
             GameObject world = scene.World;
-            {
+            /*{
                 var noise = new[]
                 {
                     Properties.Resources.space_noise_1,
@@ -54,7 +54,7 @@ namespace Game
                 new EnemySpawner(54, 500, new FuncBehavior(x => (Math.Sin((x + 1) * 10 + 15) - Math.Sin((x + 1) * 15)) * 0.2 - 0.4, 300)),
             };
             world.AddChildren(spawners);
-            world.AddChild(new EnemySpawnerDirector(spawners));
+            world.AddChild(new EnemySpawnerDirector(spawners));*/
 
             PlayerShip player = new PlayerShip(33);
             player.CenterY = world.CenterY;
