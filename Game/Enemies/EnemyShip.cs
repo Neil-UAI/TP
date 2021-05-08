@@ -16,12 +16,17 @@ namespace Game
 
         private int shipIndex;
         private EnemyBehavior behavior;
-        
+
+        private Image shipImage;
+
         public EnemyShip(int shipIndex, EnemyBehavior behavior)
         {
             this.shipIndex = shipIndex;
             this.behavior = behavior;
-            
+
+            this.shipImage = Images.ImageProvider.Instance.GetImage(this.shipIndex);
+            Extent = new SizeF(this.shipImage.Size.Width / 2, this.shipImage.Size.Height / 2);
+
             Visible = false;
         }
 
@@ -60,19 +65,7 @@ namespace Game
 
         public override void DrawOn(Graphics graphics)
         {
-            graphics.DrawImage(LoadImage(), Bounds);
-        }
-
-        private Image LoadImage()
-        {
-            Image[] ships = Spritesheet.Load(@"Resources\shipsheetparts.png", new Size(200, 200));
-            foreach (Image img in ships)
-            {
-                img.RotateFlip(RotateFlipType.Rotate270FlipNone);
-            }
-            Image result = ships[shipIndex];
-            Extent = new SizeF(result.Size.Width / 2, result.Size.Height / 2);
-            return result;
-        }
+            graphics.DrawImage(shipImage, Bounds);
+        }        
     }
 }

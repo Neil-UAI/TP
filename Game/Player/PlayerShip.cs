@@ -31,6 +31,7 @@ namespace Game
         {
             this.shipIndex = shipIndex;
             this.shipImage = Images.ImageProvider.Instance.GetImage(this.shipIndex);
+            this.shipImage.RotateFlip(RotateFlipType.RotateNoneFlipX);
             Extent = new SizeF(this.shipImage.Size.Width / 2, this.shipImage.Size.Height / 2);
 
             EventHandler.KeyDown += OnKeyDown;

@@ -38,8 +38,7 @@ namespace Game.Images
 
         public Image GetImage(int shipIndex)
         {
-            Image result = ships[shipIndex];
-            result.RotateFlip(RotateFlipType.RotateNoneFlipX);            
+            Image result = ships[shipIndex];                       
             return result;
         }
     }
