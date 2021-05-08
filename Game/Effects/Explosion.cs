@@ -65,6 +65,8 @@ namespace Game
             alpha += deltaAlpha * deltaTime;
             X += speed.X * deltaTime;
             Y += speed.Y * deltaTime;
+
+            if (alpha < 0) Delete();
         }
 
         public override void DrawOn(Graphics graphics)
