@@ -61,6 +61,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Effects\StarPool.cs" />
     <Compile Include="Effects\SpaceNoise.cs" />
     <Compile Include="Enemies\Behaviors\EnemyBehavior.cs" />
     <Compile Include="Enemies\Behaviors\FuncBehavior.cs" />

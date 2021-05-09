@@ -8,6 +8,7 @@ using System.Drawing;
 using Engine;
 
 using Engine.Extensions;
+using Game.Effects;
 
 namespace Game
 {
@@ -15,21 +16,32 @@ namespace Game
     {
         private Image img;
         float speed;
+        private StarPool sp;
+        private bool isDead = false;
 
-        public Star(Image img, float speed)
+        public bool IsDead { get => isDead; set => isDead = value; }
+
+        public Star(StarPool sp, Image img, float speed)
         {
+            this.sp = sp;
             int size = (0.16 * speed).FloorToInt().Max(1);
             this.img = new Bitmap(img, new Size(size, size));
             this.speed = speed;
-
             Extent = this.img.Size;
-            Visible = false;
         }
 
         public override void Update(float deltaTime)
         {
-            X -= speed * deltaTime;
-            Visible = true;
+            if (!this.isDead)
+            {
+                X -= this.speed * deltaTime;
+
+                if (X < -20)
+                {
+                    this.isDead = true;
+                    this.sp.RealeseStar(this);
+                }
+            }
         }
 
         public override void DrawOn(Graphics graphics)

@@ -45,10 +45,10 @@ namespace Game
                 world.AddChild(new SpaceNoise(noise[1], 3 * 3.5f, 1.50f, false, true));
                 world.AddChild(new SpaceNoise(noise[2], 3 * 5.5f, 2.00f, true, false));
             }
-
+*/
             world.AddChild(new StarSpawner());
 
-            */
+            
             
             EnemySpawner[] spawners = new EnemySpawner[]
             {

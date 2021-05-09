@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 using Engine.Extensions;
 using Engine;
+using Game.Effects;
 
 namespace Game
 {
@@ -13,17 +14,23 @@ namespace Game
     {
         private Random rnd = new Random();
         private bool firstFrame = true;
+        private StarPool starPool;
+
+        public StarSpawner()
+        {
+            this.starPool = new StarPool(300);
+        }
 
         public override void Update(float deltaTime)
         {
             if (firstFrame)
             {
                 firstFrame = false;
-                FillSpace(1000);
+                FillSpace(300);
             }
 
             Left = Parent.Right;
-            for (int i = 0; i < 200 * deltaTime; i++)
+            for (int i = 0; i < 5 * deltaTime; i++)
             {
                 SpawnStar();
             }
@@ -34,18 +41,25 @@ namespace Game
             for (int i = 0; i < numberOfStars; i++)
             {
                 CenterX = rnd.Next(Parent.Left.RoundedToInt(), Parent.Right.RoundedToInt());
-                SpawnStar();
+                Star star = this.starPool.GetStar();
+                if (star == null) break;
+
+                star.Center = Center;
+                Parent.AddChildBack(star);
+                CenterY = rnd.Next(Parent.Top.RoundedToInt(), Parent.Bottom.RoundedToInt());
             }
         }
 
         public void SpawnStar()
         {
-            Star star = new Star(Properties.Resources.star, rnd.Next(300));
-            star.Center = Center;
-            Parent.AddChildBack(star);
+            Star star = this.starPool.GetStar();
+            if (star == null) return;
 
-            CenterY = rnd.Next(Parent.Top.RoundedToInt(), Parent.Bottom.RoundedToInt());
+            star.X = MainScene.ActiveForm.Width;
+            star.Y = rnd.Next(0, MainScene.ActiveForm.Height);
+            star.IsDead = false;
         }
 
     }
 }
+
