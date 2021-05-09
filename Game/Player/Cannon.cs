@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 using Engine;
 using System.Drawing;
+using Game.Sounds;
 
 namespace Game
 {
@@ -16,10 +17,13 @@ namespace Game
         private int shotInterval;
         private int lastShoot = 0;
         private bool autoFire = false;
-        
+
+        private SoundProvider sp;
+
         public Cannon()
         {
             img = Properties.Resources.cannon;
+            sp = SoundProvider.Instance;
             Extent = img.Size;
             DefaultShotInterval();
         }
@@ -78,7 +82,7 @@ namespace Game
                 projectile.Center = Center;
                 projectile.Left = Right;
                 Root.AddChild(projectile);
-                Play(Properties.Resources.laser);
+                sp.Play("laser");
             }
         }
 

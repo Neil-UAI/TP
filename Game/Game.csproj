@@ -90,6 +90,7 @@
     <Compile Include="PowerUps\SpeedUp.cs" />
     <Compile Include="Effects\Star.cs" />
     <Compile Include="Effects\StarSpawner.cs" />
+    <Compile Include="Sounds\SoundProvider.cs" />
     <EmbeddedResource Include="MainScene.resx">
       <DependentUpon>MainScene.cs</DependentUpon>
     </EmbeddedResource>

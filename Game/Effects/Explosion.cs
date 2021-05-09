@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 
 using Engine;
 using Engine.Extensions;
+using Game.Sounds;
 
 namespace Game
 {
@@ -32,9 +33,14 @@ namespace Game
                 explosion.Center = point;
                 world.AddChild(explosion);
             }
-            world.Play(rnd.NextDouble() > 0.5 ?
-                Properties.Resources.explosion1 :
-                Properties.Resources.explosion2);
+            if (rnd.NextDouble() > 0.5)
+            {
+                SoundProvider.Instance.Play("explosion1");
+            }
+            else
+            {
+                SoundProvider.Instance.Play("explosion2");
+            }
         }
 
         private float alpha = 1;

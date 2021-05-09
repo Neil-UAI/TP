@@ -11,6 +11,8 @@ using System.Windows.Forms;
 using Engine;
 using Engine.Utils;
 using Engine.Profiling;
+using Game.Images;
+using Game.Sounds;
 
 namespace Game
 {
@@ -25,6 +27,9 @@ namespace Game
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            ImageProvider ip = ImageProvider.Instance;
+            SoundProvider sp = SoundProvider.Instance;
+
             Random rnd = new Random();
             GameObject world = scene.World;
             /*{
@@ -71,6 +76,11 @@ namespace Game
                 tally.UpdateDurations.LastOrDefault(), tally.AverageUpdate, tally.MaxUpdate,
                 tally.DrawDurations.LastOrDefault(), tally.AverageDraw, tally.MaxDraw,
                 tally.Count, tally.InstanceCounter.LastOrDefault(), Environment.TickCount - startTime);
+        }
+
+        private void scene_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }
