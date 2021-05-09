@@ -26,6 +26,7 @@ namespace Game
 
             cannon = new Cannon();
             cannon.ShotInterval = 150;
+            PlayerShip.cannonsList.Add(cannon);
             AddChild(cannon);
         }
 
@@ -36,6 +37,7 @@ namespace Game
 
             if (Environment.TickCount - startTime > duration)
             {
+                PlayerShip.cannonsList.Remove(cannon);
                 Delete();
             }
         }

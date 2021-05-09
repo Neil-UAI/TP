@@ -25,6 +25,7 @@ namespace Game
         private bool shieldActivated = false;
         private float speed = MIN_SPEED;
 
+        public static List<Cannon> cannonsList = new List<Cannon>();
         private Image shipImage;
 
         public PlayerShip(int shipIndex)
@@ -41,6 +42,7 @@ namespace Game
             cannon.Center = Center;
             cannon.Right = Right;
             cannon.Visible = false;
+            cannonsList.Add(cannon);
             AddChild(cannon);
         }
 
@@ -168,10 +170,7 @@ namespace Game
 
         private void Shoot()
         {
-            IEnumerable<Cannon> cannons = AllObjects
-                .Select((m) => m as Cannon)
-                .Where((m) => m != null);
-            foreach (Cannon cannon in cannons)
+            foreach (Cannon cannon in PlayerShip.cannonsList)
             {
                 cannon.Shoot();
             }

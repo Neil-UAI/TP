@@ -12,6 +12,8 @@ namespace Game
     {
         private int duration;
         private int startTime;
+        Cannon c1;
+        Cannon c2;
 
         public SideCannons(int duration = 2500)
         {
@@ -20,16 +22,18 @@ namespace Game
 
             Height = 100;
 
-            Cannon c1 = new Cannon();
+            c1 = new Cannon();
             c1.Center = Center;
             c1.CenterY = Top;
             c1.ShotInterval = 150;
+            PlayerShip.cannonsList.Add(c1);
             AddChild(c1);
 
-            Cannon c2 = new Cannon();
+            c2 = new Cannon();
             c2.Center = Center;
             c2.CenterY = Bottom;
             c2.ShotInterval = 150;
+            PlayerShip.cannonsList.Add(c2);
             AddChild(c2);
         }
 
@@ -37,6 +41,8 @@ namespace Game
         {
             if (Environment.TickCount - startTime > duration)
             {
+                PlayerShip.cannonsList.Remove(c1);
+                PlayerShip.cannonsList.Remove(c2);
                 Delete();
             }
         }
