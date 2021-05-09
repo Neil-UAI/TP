@@ -15,6 +15,7 @@ namespace Game
         private int shipIndex;
         private bool active = false;
         private EnemyBehavior behavior;
+        public static List<EnemyShip> enemyList = new List<EnemyShip>();
 
         private int last = Environment.TickCount;
 
@@ -50,8 +51,9 @@ namespace Game
             {
                 last = now;
                 
-                EnemyShip ship = new EnemyShip(shipIndex, behavior);
+                EnemyShip ship = new EnemyShip(shipIndex, behavior);                
                 ship.Center = Center;
+                enemyList.Add(ship);
                 world.AddChild(ship);
             }
         }

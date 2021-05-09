@@ -134,10 +134,7 @@ namespace Game
 
         private bool CheckForCollision()
         {
-            IEnumerable<EnemyShip> collisions = AllObjects
-                .Where((m) => CollidesWith(m))
-                .Select((m) => m as EnemyShip)
-                .Where((m) => m != null);
+            IEnumerable<EnemyShip> collisions = EnemySpawner.enemyList.Where((m) => CollidesWith(m));
             if (collisions.Count() == 0) return false;
             foreach (EnemyShip enemy in collisions)
             {

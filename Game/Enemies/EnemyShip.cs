@@ -49,6 +49,12 @@ namespace Game
         {
             behavior.Update(this, deltaTime);
             Visible = true;
+
+            if (X < -10)
+            {
+                EnemySpawner.enemyList.Remove(this);
+                Delete();
+            }
         }
 
         public void Explode()
