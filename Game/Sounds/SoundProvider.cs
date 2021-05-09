@@ -34,6 +34,7 @@ namespace Game.Sounds
             this.sounds["laser"] = new SoundPlayer(Properties.Resources.laser);
             this.sounds["explosion1"] = new SoundPlayer(Properties.Resources.explosion1);
             this.sounds["explosion2"] = new SoundPlayer(Properties.Resources.explosion2);
+            this.sounds["start"] = new SoundPlayer(Properties.Resources.start);
         }
 
         public void Play(string sound)

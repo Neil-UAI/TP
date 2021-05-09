@@ -63,6 +63,7 @@ namespace Game
             {
                 PowerUp pup = new PowerUp();
                 pup.Center = Center;
+                PowerUps.PowerUpsManager.powerUpsList.Add(pup);
                 Root.AddChild(pup);
             }
             Explosion.Burst(Parent, Center);

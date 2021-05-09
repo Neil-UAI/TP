@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 using Engine;
 using System.Drawing;
+using Game.Sounds;
 
 namespace Game
 {
@@ -37,7 +38,7 @@ namespace Game
             GameObject powerUp = ChoosePowerUp(ship);
             powerUp.Center = ship.Center;
             ship.AddChild(powerUp);
-            Play(Properties.Resources.start);
+            SoundProvider.Instance.Play("start");
             Delete();
         }
 

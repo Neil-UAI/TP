@@ -80,6 +80,7 @@
       <DependentUpon>MainScene.cs</DependentUpon>
     </Compile>
     <Compile Include="Player\PlayerShip.cs" />
+    <Compile Include="PowerUps\PowerUpsManager.cs" />
     <Compile Include="PowerUps\PowerUp.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Player\Projectile.cs" />

@@ -145,9 +145,11 @@ namespace Game
 
         private void CheckForPowerUps()
         {
-            IEnumerable<PowerUp> pups = AllObjects
+            IEnumerable<PowerUp> pups = PowerUps.PowerUpsManager.powerUpsList
                 .Where((m) => CollidesWith(m))
-                .Select((m) => m as PowerUp);
+                .Where((m) => m != null);
+
+            if (pups.Count() == 0) return;
 
             foreach (PowerUp pup in pups)
             {
