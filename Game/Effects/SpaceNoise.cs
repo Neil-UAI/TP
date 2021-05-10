@@ -18,6 +18,8 @@ namespace Game
         bool flipX;
         bool flipY;
 
+        Bitmap[] images;
+
         public SpaceNoise(Image image, float speed, float scale, bool flipX, bool flipY)
         {
             this.speed = speed;
@@ -27,6 +29,14 @@ namespace Game
             this.image = image;
 
             Extent = new SizeF(image.Width * scale, image.Height * scale);
+
+            images = new Bitmap[15];
+            for (int i = 0; i < images.Length; i++)
+            {
+                images[i] = new Bitmap(image, new Size(Width.RoundedToInt(), Height.RoundedToInt()));
+                if (flipX) { images[i].RotateFlip(RotateFlipType.RotateNoneFlipX); }
+                if (flipY) { images[i].RotateFlip(RotateFlipType.RotateNoneFlipY); }
+            }
         }
 
         public override void Update(float deltaTime)
@@ -51,23 +61,27 @@ namespace Game
             FillScreenTiled(graphics);
         }
 
+        int w;
+        int h;
+        int x;
+        int y;
+        Point point = new Point();
         public void FillScreenTiled(Graphics graphics)
         {
-            int w = Width.RoundedToInt();
-            int h = Height.RoundedToInt();
-            int x = Position.X.RoundedToInt();
-            int y = Position.Y.RoundedToInt();
-            while (x >= Parent.Left) { x -= w; }
-            while (y >= Parent.Top) { y -= h; }
+            w = Width.RoundedToInt();
+            h = Height.RoundedToInt();
+            x = Position.X.RoundedToInt();
+            y = Position.Y.RoundedToInt();
 
-            for (int x1 = x; x1 <= Parent.Right; x1 += w)
+            int i = 0;
+            for (int x1 = x - Parent.Right.RoundedToInt(); x1 <= Parent.Right; x1 += w)
             {
                 for (int y1 = y; y1 <= Parent.Bottom; y1 += h)
                 {
-                    var img = new Bitmap(image, new Size(w, h));
-                    if (flipX) { img.RotateFlip(RotateFlipType.RotateNoneFlipX); }
-                    if (flipY) { img.RotateFlip(RotateFlipType.RotateNoneFlipY); }
-                    graphics.DrawImage(img, new Point(x1, y1));
+                    point.X = x1;
+                    point.Y = y1;
+                    graphics.DrawImage(images[i], point);
+                    i++;
                 }
             }
         }
