@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 using System.Drawing;
 using Engine;
+using Game.Enemies;
 
 namespace Game
 {
@@ -50,10 +51,11 @@ namespace Game
             if (now - last > emmisionInterval)
             {
                 last = now;
-                
-                EnemyShip ship = new EnemyShip(shipIndex, behavior);                
-                ship.Center = Center;
+                EnemyShip ship = EnemyPool.Instance.GetEnemy(shipIndex);
+                if (ship == null) { return; }
                 enemyList.Add(ship);
+
+                ship.Center = Center;
                 world.AddChild(ship);
             }
         }

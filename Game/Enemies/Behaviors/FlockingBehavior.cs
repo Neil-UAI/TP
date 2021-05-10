@@ -20,29 +20,32 @@ namespace Game
 
         public override void Update(EnemyShip ship, float deltaTime)
         {
-            ship.CenterX -= speed * deltaTime;
+            if (ship.Visible)
+            {
+                ship.CenterX -= speed * deltaTime;
 
-            GameObject target = null;
-            if (IndexInFlock(ship) == 0)
-            {
-                target = ship.Player;
-            }
-            else
-            {
-                target = Flock(ship).ElementAtOrDefault(IndexInFlock(ship) - 1);
-            }
-
-            if (target != null)
-            {
-                PointF targetPos = target.Center;
-                if (IndexInFlock(ship) > 0)
+                GameObject target = null;
+                if (IndexInFlock(ship) == 0)
                 {
-                    float increment = IndexInFlock(ship) * 100 * (IndexInFlock(ship) % 2 == 0 ? -1 : 1);
-                    targetPos = new PointF(targetPos.X, targetPos.Y + increment);
+                    target = ship.Player;
+                }
+                else
+                {
+                    target = Flock(ship).ElementAtOrDefault(IndexInFlock(ship) - 1);
                 }
 
-                float diff = targetPos.Y - ship.CenterY;
-                ship.CenterY += (speed * 5 / ship.Root.Height) * diff * deltaTime;
+                if (target != null)
+                {
+                    PointF targetPos = target.Center;
+                    if (IndexInFlock(ship) > 0)
+                    {
+                        float increment = IndexInFlock(ship) * 100 * (IndexInFlock(ship) % 2 == 0 ? -1 : 1);
+                        targetPos = new PointF(targetPos.X, targetPos.Y + increment);
+                    }
+
+                    float diff = targetPos.Y - ship.CenterY;
+                    ship.CenterY += (speed * 5 / ship.Root.Height) * diff * deltaTime;
+                }
             }
         }
 

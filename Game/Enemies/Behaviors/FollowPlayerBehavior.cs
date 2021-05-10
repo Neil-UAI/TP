@@ -24,19 +24,21 @@ namespace Game
             {
                 ship.CenterY = rnd.Next(ship.Root.Top.FloorToInt(), ship.Root.Bottom.FloorToInt());
             }
-
-            ship.CenterX -= speed * deltaTime;
-
-            if (ship.Player != null)
+            else
             {
-                double multiplier = Math.Abs(ship.Player.X - ship.X) / (ship.Root.Width);
-                if (ship.Player.Top > ship.CenterY)
+                ship.CenterX -= speed * deltaTime;
+
+                if (ship.Player != null)
                 {
-                    ship.CenterY += ((float)(speed * multiplier * deltaTime));
-                }
-                else if (ship.Player.Bottom < ship.CenterY)
-                {
-                    ship.CenterY -= ((float)(speed * multiplier * deltaTime));
+                    double multiplier = Math.Abs(ship.Player.X - ship.X) / (ship.Root.Width);
+                    if (ship.Player.Top > ship.CenterY)
+                    {
+                        ship.CenterY += ((float)(speed * multiplier * deltaTime));
+                    }
+                    else if (ship.Player.Bottom < ship.CenterY)
+                    {
+                        ship.CenterY -= ((float)(speed * multiplier * deltaTime));
+                    }
                 }
             }
         }

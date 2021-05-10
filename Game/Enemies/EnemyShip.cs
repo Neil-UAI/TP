@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using System.Drawing;
 using Engine;
 using Engine.Utils;
+using Game.Enemies;
 
 namespace Game
 {
@@ -18,7 +19,7 @@ namespace Game
         private EnemyBehavior behavior;
 
         private Image shipImage;
-
+        public bool isDead = true;
         public EnemyShip(int shipIndex, EnemyBehavior behavior)
         {
             this.shipIndex = shipIndex;
@@ -45,15 +46,22 @@ namespace Game
             get { return behavior; }
         }
 
+        public int ShipIndex { get => shipIndex; set => shipIndex = value; }
+
         public override void Update(float deltaTime)
         {
-            behavior.Update(this, deltaTime);
-            Visible = true;
-
-            if (X < -10)
+            if (!isDead)
             {
-                EnemySpawner.enemyList.Remove(this);
-                Delete();
+                behavior.Update(this, deltaTime);
+                Visible = true;
+
+                if (X < -100)
+                {                    
+                    EnemyPool.world.RemoveChild(this);
+                    EnemyPool.Instance.ReleaseEnemy(this);
+                    isDead = true;
+                    Visible = false;
+                }
             }
         }
 
@@ -66,8 +74,12 @@ namespace Game
                 PowerUps.PowerUpsManager.powerUpsList.Add(pup);
                 Root.AddChild(pup);
             }
-            Explosion.Burst(Parent, Center);
-            Delete();
+            Explosion.Burst(Parent, Center);            
+            EnemyPool.world.RemoveChild(this);
+            EnemyPool.Instance.ReleaseEnemy(this);
+            Visible = false;
+            isDead = true;
+            X = -200;
         }
 
         public override void DrawOn(Graphics graphics)
