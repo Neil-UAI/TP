@@ -13,6 +13,7 @@ using Engine.Utils;
 using Engine.Profiling;
 using Game.Images;
 using Game.Sounds;
+using Game.Effects;
 
 namespace Game
 {
@@ -32,6 +33,9 @@ namespace Game
 
             Random rnd = new Random();
             GameObject world = scene.World;
+
+            ExplosionPool.Instance.Init(world);
+
             {
                 var noise = new[]
                 {
