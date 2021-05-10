@@ -65,7 +65,7 @@ namespace Game
 
         public void Explode()
         {
-            //if (rnd.NextDouble() > 0.95)
+            if (rnd.NextDouble() > 0.95)
             {
                 PowerUp pup = new PowerUp();
                 pup.Center = Center;
