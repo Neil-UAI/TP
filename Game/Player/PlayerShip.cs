@@ -27,8 +27,22 @@ namespace Game
 
         public static List<Cannon> cannonsList = new List<Cannon>();
         private Image shipImage;
+        private static PlayerShip instance;
 
-        public PlayerShip(int shipIndex)
+        public static PlayerShip Instance
+        {
+            get
+            {
+                if (instance == null)
+                {
+                    instance = new PlayerShip(33);
+                }
+
+                return instance;
+            }
+        }
+
+        private PlayerShip(int shipIndex)
         {
             this.shipIndex = shipIndex;
             this.shipImage = Images.ImageProvider.Instance.GetImage(this.shipIndex);

@@ -35,9 +35,7 @@ namespace Game
         {
             get
             {
-                return AllObjects
-                    .Select(obj => obj as PlayerShip)
-                    .FirstOrDefault(obj => obj != null);
+                return PlayerShip.Instance;
             }
         }
 
@@ -67,7 +65,7 @@ namespace Game
 
         public void Explode()
         {
-            if (rnd.NextDouble() > 0.95)
+            //if (rnd.NextDouble() > 0.95)
             {
                 PowerUp pup = new PowerUp();
                 pup.Center = Center;

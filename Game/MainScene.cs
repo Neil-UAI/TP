@@ -69,7 +69,7 @@ namespace Game
             world.AddChildren(spawners);
             world.AddChild(new EnemySpawnerDirector(spawners));
 
-            PlayerShip player = new PlayerShip(33);
+            PlayerShip player = PlayerShip.Instance;
             player.CenterY = world.CenterY;
             player.Left = world.Left + 100;
             world.AddChild(player);
