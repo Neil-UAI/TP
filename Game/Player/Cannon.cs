@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using Engine;
 using System.Drawing;
 using Game.Sounds;
+using Game.Player;
 
 namespace Game
 {
@@ -75,7 +76,9 @@ namespace Game
             {
                 lastShoot = now;
 
-                Projectile projectile = new Projectile();
+                Projectile projectile = ProjectilePool.Instance.GetProjectile();
+                if (projectile == null) return;
+                projectile.isDead = false;
                 projectile.Center = Center;
                 projectile.Left = Right;
                 Root.AddChild(projectile);

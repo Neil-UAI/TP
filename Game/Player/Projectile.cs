@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using System.Drawing;
 using Engine;
 using Engine.Extensions;
+using Game.Player;
 
 namespace Game
 {
@@ -14,6 +15,7 @@ namespace Game
     {
         private Image img;
         private float speed = 700;
+        public bool isDead = true;
 
         public Projectile()
         {
@@ -24,22 +26,33 @@ namespace Game
 
         public override void Update(float deltaTime)
         {
+            if (isDead) return;
+
             X += speed * deltaTime;
-            
+
             CheckForCollision();
+
+            if (X > 1400)
+            {
+                ProjectilePool.Instance.ReleaseProjectile(this);
+                isDead = true;
+                this.X = -400;
+            }
         }
 
         private void CheckForCollision()
         {
-            IEnumerable<EnemyShip> collisions = AllObjects
-                .Where((m) => CollidesWith(m))
-                .Select((m) => m as EnemyShip);
+            IEnumerable<EnemyShip> collisions = EnemySpawner.enemyList
+               .Where((m) => CollidesWith(m))
+               .Where((m) => m != null);
             foreach (EnemyShip enemy in collisions)
             {
                 if (enemy != null)
                 {
-                    enemy.Explode();
-                    Delete();
+                    enemy.Explode();                    
+                    isDead = true;
+                    this.X = -400;
+                    ProjectilePool.Instance.ReleaseProjectile(this);
                 }
             }
         }

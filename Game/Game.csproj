@@ -81,6 +81,7 @@
     <Compile Include="MainScene.Designer.cs">
       <DependentUpon>MainScene.cs</DependentUpon>
     </Compile>
+    <Compile Include="Player\ProjectilePool.cs" />
     <Compile Include="Player\PlayerShip.cs" />
     <Compile Include="PowerUps\PowerUpsManager.cs" />
     <Compile Include="PowerUps\PowerUp.cs" />

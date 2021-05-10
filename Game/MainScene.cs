@@ -15,6 +15,7 @@ using Game.Images;
 using Game.Sounds;
 using Game.Effects;
 using Game.Enemies;
+using Game.Player;
 
 namespace Game
 {
@@ -37,6 +38,7 @@ namespace Game
 
             ExplosionPool.Instance.Init(world);
             EnemyPool.Instance.Init(world);
+            ProjectilePool.Instance.Init(world);
 
             {
                 var noise = new[]
